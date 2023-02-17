@@ -1,6 +1,6 @@
-name: KotlinPaperTemplate
+name: ArtisanContract
 version: '${version}'
-main: dev.krysztal.demo.DemoMain
+main: dev.krysztal.artisan.Artisan
 api-version: 1.19
-prefix: KotlinPaperTemplate
-description: The develop template of paper spigot using Kotlin language.
+prefix: ArtisanContact
+description: A plugin that lets you make a contract with the Artisan

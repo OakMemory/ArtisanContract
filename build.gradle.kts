@@ -4,6 +4,7 @@ plugins {
     kotlin("jvm") version "1.7.10"
     java
     id("com.github.johnrengelman.shadow") version "7.1.2"
+    id("io.papermc.paperweight.userdev") version "1.4.0"
 }
 
 group = "dev.krysztal"
@@ -25,9 +26,7 @@ repositories {
 
 dependencies {
 
-
-    compileOnly("io.papermc.paper:paper-api:$paperVersion")
-    compileOnly("org.spigotmc:spigot:$paperVersion")
+    paperDevBundle(paperVersion)
 
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
 
