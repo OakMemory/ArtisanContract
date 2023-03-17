@@ -1,5 +1,8 @@
 package dev.krysztal.artisan.listeners
 
+import dev.krysztal.artisan.ArtisanConfig.AVAILABLE_AXES
+import dev.krysztal.artisan.ArtisanConfig.AVAILABLE_PICKAXES
+import dev.krysztal.artisan.ArtisanConfig.PICKAXE_ITEM_REFINE
 import dev.krysztal.artisan.foundation.extension.isRightHand
 import net.kyori.adventure.text.Component
 import org.bukkit.Material
@@ -15,51 +18,19 @@ import kotlin.random.Random
 
 class RefineListeners : Listener {
 
-    private val pickaxeRefiningMapping = mapOf(
-        Pair(Material.IRON_ORE, Material.IRON_INGOT),
-        Pair(Material.DEEPSLATE_IRON_ORE, Material.IRON_INGOT),
-        Pair(Material.GOLD_ORE, Material.GOLD_INGOT),
-        Pair(Material.DEEPSLATE_GOLD_ORE, Material.GOLD_INGOT)
-    )
-
-    private val availablePickaxes = listOf(
-        Material.IRON_PICKAXE,
-        Material.GOLDEN_PICKAXE,
-        Material.DIAMOND_PICKAXE,
-        Material.NETHERITE_PICKAXE
-    )
-
-    private val availableAxes = listOf(
-        Material.STONE_AXE,
-        Material.IRON_AXE,
-        Material.GOLDEN_AXE,
-        Material.DIAMOND_AXE,
-        Material.NETHERITE_AXE
-    )
-
-    private val availableHoes = listOf(
-        Material.STONE_HOE,
-        Material.IRON_HOE,
-        Material.GOLDEN_HOE,
-        Material.DIAMOND_HOE,
-        Material.NETHERITE_HOE
-    )
 
     @EventHandler
     fun pickaxeRefineOres(event: PlayerInteractEvent) {
-
-        val checkResult = check(event, availablePickaxes)
+        val checkResult = check(event, AVAILABLE_PICKAXES)
         val fortune = checkResult.second
 
         if (!checkResult.first) return
 
-        if (!pickaxeRefiningMapping.contains(event.clickedBlock?.type)) return
+        if (!PICKAXE_ITEM_REFINE.contains(event.clickedBlock?.type)) return
 
-        val dropStack =
-            ItemStack(
-                pickaxeRefiningMapping[event.clickedBlock!!.type]!!,
-                1 + Random.nextInt(0, fortune)
-            )
+        val dropStack = ItemStack(
+            PICKAXE_ITEM_REFINE[event.clickedBlock!!.type]!!, 1 + Random.nextInt(0, fortune)
+        )
 
         breakAndDrop(event, dropStack)
     }
@@ -67,18 +38,16 @@ class RefineListeners : Listener {
     @EventHandler
     fun axeRefine(event: PlayerInteractEvent) {
 
-        val checkResult = check(event, availableAxes)
+        val checkResult = check(event, AVAILABLE_AXES)
         val fortune = checkResult.second
 
         if (!checkResult.first) return
 
         if (!Tag.LOGS.isTagged(event.clickedBlock?.type!!)) return
 
-        val dropStack =
-            ItemStack(
-                Material.CHARCOAL,
-                1 + Random.nextInt(0, fortune)
-            )
+        val dropStack = ItemStack(
+            Material.CHARCOAL, 1 + Random.nextInt(0, fortune)
+        )
 
         breakAndDrop(event, dropStack)
 
@@ -105,10 +74,7 @@ class RefineListeners : Listener {
         event.player.giveExp(-20)
 
         event.player.playSound(
-            event.clickedBlock!!.location.toCenterLocation(),
-            Sound.BLOCK_FIRE_EXTINGUISH,
-            1f,
-            1f
+            event.clickedBlock!!.location.toCenterLocation(), Sound.BLOCK_FIRE_EXTINGUISH, 1f, 1f
         )
     }
 }

@@ -39,7 +39,6 @@ class ExperienceAbsorptionListeners : Listener {
 
         val random = Random()
 
-
         when (itemInMainHand) {
             Material.AMETHYST_SHARD -> event.player.giveExp(5 + random.nextInt(5), true)
             Material.AMETHYST_BLOCK -> event.player.giveExp(20 + random.nextInt(20), true)

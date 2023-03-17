@@ -9,12 +9,18 @@ import org.bukkit.plugin.java.JavaPlugin
 class Artisan() : JavaPlugin() {
 
     override fun onEnable() {
-        this.logger.info("Initializing the configuration file...")
         pluginInstance = this
+
+        this.logger.info("Initializing the configuration file...")
         this.logger.info("Total number of registered conversion tables:\t\t${ArtisanConfig.EXPERIENCE_CONVERSIONS.count()}")
-        this.logger.info("Total registered axes available for refining:\t\t${ArtisanConfig.REFINE_TOOL_AXES.count()}")
-        this.logger.info("Total registered pickaxes available for refining:\t${ArtisanConfig.REFINE_TOOL_PICKAXES.count()}")
+        this.logger.info("Total registered axes available for refining:\t\t${ArtisanConfig.REFINE_AVAILABLE_AXES.count()}")
+        this.logger.info("Total registered pickaxes available for refining:\t${ArtisanConfig.REFINE_AVAILABLE_PICKAXES.count()}")
+        this.logger.info("Total registered pickaxes' mapping:\t\t\t${ArtisanConfig.REFINE_AVAILABLE_PICKAXES.count()}")
         this.logger.info("Configuration file initialized successfully!")
+
+        this.logger.info("Initializing the material list...")
+        ArtisanConfig.REFINE_AVAILABLE_AXES
+        this.logger.info("Material list initialization is complete!")
 
         this.logger.info("Listener registration in progress...")
         Bukkit.getPluginManager().registerEvents(ExperienceAbsorptionListeners(), this)
@@ -24,7 +30,6 @@ class Artisan() : JavaPlugin() {
     }
 
     override fun onDisable() {
-        
     }
 
     companion object {

@@ -1,6 +1,6 @@
 package dev.krysztal.artisan.listeners
 
-import dev.krysztal.artisan.foundation.extension.buildRunner
+import dev.krysztal.artisan.ArtisanConfig
 import dev.krysztal.artisan.foundation.extension.isRightHand
 import net.kyori.adventure.text.Component
 import org.bukkit.Particle
@@ -16,37 +16,38 @@ class EquipmentRepairListeners : Listener {
         if (!event.player.isSneaking) return
         if (!event.isRightHand()) return
 
-        {
-            var repairCount = 0
-            event.player.equipment.armorContents.forEach {
+        var repairCount = 0
+        event.player.equipment.armorContents
+            .filterNotNull()
+            .forEach {
                 if (it.isRepairableBy(event.player.inventory.itemInMainHand)) repairCount++
             }
 
-            val coefficient = ((1.0 / 3.0) / repairCount)
-            var repairedPoint = 0.0
+        val coefficient = ((1.0 / 3.0) / repairCount)
+        var repairedDurability = 0.0
 
-            event.player.equipment.armorContents
-                .filter { it.durability != 0.toShort() }
-                .forEach {
-                    if (event.player.level < 1) return@forEach
-                    if (it.isRepairableBy(event.player.inventory.itemInMainHand)) {
-                        val repairPoint = (it.type.maxDurability * coefficient)
+        event.player.equipment.armorContents
+            .filterNotNull()
+            .filter { it.durability != 0.toShort() }
+            .forEach {
+                if (event.player.level < ArtisanConfig.REPAIR_COST) return@forEach
+                if (it.isRepairableBy(event.player.inventory.itemInMainHand)) {
+                    val repairPoint = (it.type.maxDurability * coefficient)
 
-                        it.durability =
-                            (it.durability - repairPoint)
-                                .toInt()
-                                .toShort()
-                        event.player.level -= 2
-                        event.player.inventory.itemInMainHand.amount -= 1
-                        event.player.world.playSound(event.player, Sound.BLOCK_ANVIL_USE, 0.25f, 0.25f)
-                        event.player.world.spawnParticle(Particle.LAVA, event.player.location.toCenterLocation(), 8)
+                    it.durability =
+                        (it.durability - repairPoint)
+                            .toInt()
+                            .toShort()
+                    event.player.level -= ArtisanConfig.REPAIR_COST
+                    event.player.inventory.itemInMainHand.amount -= 1
+                    event.player.world.playSound(event.player, Sound.BLOCK_ANVIL_USE, 0.25f, 0.25f)
+                    event.player.world.spawnParticle(Particle.LAVA, event.player.location.toCenterLocation(), 8)
 
-                        repairedPoint += repairPoint.toInt()
-                    }
+                    repairedDurability += repairPoint.toInt()
                 }
+            }
 
-            event.player.sendActionBar(Component.text("Repaired $repairedPoint durability totally."))
-        }.buildRunner().run()
+        event.player.sendActionBar(Component.text("Repaired $repairedDurability durability totally."))
 
     }
 }
