@@ -1,0 +1,21 @@
+experience_conversion:
+  - { name: "minecraft:amethyst_shard", exp: 5, max: 5, min: 0 }
+  - { name: "minecraft:amethyst_block", exp: 20, max: 20, min: 0 }
+  - { name: "minecraft:echo_shard", exp: 200, max: 100, min: 0 }
+
+refine:
+  cost: 100
+  pickaxes:
+    - "minecraft:stone_pickaxe"
+    - "minecraft:iron_pickaxe"
+    - "minecraft:diamond_pickaxe"
+    - "minecraft:netherite_pickaxe"
+
+  axes:
+    - "minecraft:stone_axe"
+    - "minecraft:iron_axe"
+    - "minecraft:diamond_axe"
+    - "minecraft:netherite_axe"
+
+repair:
+  cost: 100

@@ -1,20 +1,28 @@
 package dev.krysztal.artisan
 
-import dev.krysztal.artisan.events.EquipmentRepairEvents
-import dev.krysztal.artisan.events.ExperienceAbsorptionEvents
-import dev.krysztal.artisan.events.ToolUseEvents
+import dev.krysztal.artisan.listeners.EquipmentRepairListeners
+import dev.krysztal.artisan.listeners.ExperienceAbsorptionListeners
+import dev.krysztal.artisan.listeners.RefineListeners
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
 
 class Artisan() : JavaPlugin() {
 
     override fun onEnable() {
-        Bukkit.getPluginManager().registerEvents(ExperienceAbsorptionEvents(), this)
-        Bukkit.getPluginManager().registerEvents(ToolUseEvents(), this)
-        Bukkit.getPluginManager().registerEvents(EquipmentRepairEvents(), this)
+        pluginInstance = this
+
+        ArtisanConfig.REFINE_TOOL_AXES
+
+        Bukkit.getPluginManager().registerEvents(ExperienceAbsorptionListeners(), this)
+        Bukkit.getPluginManager().registerEvents(RefineListeners(), this)
+        Bukkit.getPluginManager().registerEvents(EquipmentRepairListeners(), this)
     }
 
     override fun onDisable() {
 
+    }
+
+    companion object {
+        lateinit var pluginInstance: JavaPlugin
     }
 }

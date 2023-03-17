@@ -1,5 +1,5 @@
 name: ArtisanContract
-version: '${version}'
+version: "${version}"
 main: dev.krysztal.artisan.Artisan
 api-version: 1.19
 prefix: ArtisanContact

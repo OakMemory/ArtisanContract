@@ -1,4 +1,4 @@
-package dev.krysztal.artisan.events
+package dev.krysztal.artisan.listeners
 
 import dev.krysztal.artisan.foundation.extension.isRightHand
 import org.bukkit.Material
@@ -9,7 +9,7 @@ import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerInteractEvent
 import java.util.*
 
-class ExperienceAbsorptionEvents : Listener {
+class ExperienceAbsorptionListeners : Listener {
 
     @EventHandler
     fun useBookOnAmethyst(event: PlayerInteractEvent) {

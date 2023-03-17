@@ -1,4 +1,4 @@
-package dev.krysztal.artisan.events
+package dev.krysztal.artisan.listeners
 
 import dev.krysztal.artisan.foundation.extension.isRightHand
 import net.kyori.adventure.text.Component
@@ -13,7 +13,7 @@ import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
 import kotlin.random.Random
 
-class ToolUseEvents : Listener {
+class RefineListeners : Listener {
 
     private val pickaxeRefiningMapping = mapOf(
         Pair(Material.IRON_ORE, Material.IRON_INGOT),
@@ -81,16 +81,6 @@ class ToolUseEvents : Listener {
             )
 
         breakAndDrop(event, dropStack)
-
-    }
-
-    @EventHandler
-    fun hoeFertilizer(event: PlayerInteractEvent) {
-        val checkResult = check(event, availableHoes)
-
-        if (!checkResult.first) return
-
-        val block = event.clickedBlock
 
     }
 

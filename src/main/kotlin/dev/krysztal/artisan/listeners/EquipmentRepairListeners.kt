@@ -1,4 +1,4 @@
-package dev.krysztal.artisan.events
+package dev.krysztal.artisan.listeners
 
 import dev.krysztal.artisan.foundation.extension.buildRunner
 import dev.krysztal.artisan.foundation.extension.isRightHand
@@ -9,7 +9,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerInteractEvent
 
-class EquipmentRepairEvents : Listener {
+class EquipmentRepairListeners : Listener {
 
     @EventHandler
     fun repairEquipment(event: PlayerInteractEvent) {
