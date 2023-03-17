@@ -15,7 +15,10 @@ object ArtisanConfig {
         this.REFINE_EXPERIENCE_COST = Artisan.pluginInstance.config.getInt("refine.cost")
         this.REPAIR_EXPERIENCE_COST = Artisan.pluginInstance.config.getInt("repair.cost")
         this.EXPERIENCE_CONVERSIONS =
-            Artisan.pluginInstance.config.getList("experience", EXPERIENCE_CONVERSIONS) as List<ExperienceConversion>
+            Artisan.pluginInstance.config.getList(
+                "experience_conversion",
+                EXPERIENCE_CONVERSIONS
+            ) as List<ExperienceConversion>
         this.REFINE_TOOL_AXES = Artisan.pluginInstance.config.getStringList("refine.axes")
         this.REFINE_TOOL_PICKAXES = Artisan.pluginInstance.config.getStringList("refine.pickaxes")
     }
