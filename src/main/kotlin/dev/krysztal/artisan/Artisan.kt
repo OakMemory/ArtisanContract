@@ -2,7 +2,7 @@ package dev.krysztal.artisan
 
 import dev.krysztal.artisan.listeners.EquipmentRepairListeners
 import dev.krysztal.artisan.listeners.ExperienceAbsorptionListeners
-import dev.krysztal.artisan.listeners.RefineListeners
+import dev.krysztal.artisan.listeners.RefiningBlockListeners
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
 
@@ -24,7 +24,7 @@ class Artisan() : JavaPlugin() {
 
         this.logger.info("Listener registration in progress...")
         Bukkit.getPluginManager().registerEvents(ExperienceAbsorptionListeners(), this)
-        Bukkit.getPluginManager().registerEvents(RefineListeners(), this)
+        Bukkit.getPluginManager().registerEvents(RefiningBlockListeners(), this)
         Bukkit.getPluginManager().registerEvents(EquipmentRepairListeners(), this)
         this.logger.info("Successfully registered listener!")
     }

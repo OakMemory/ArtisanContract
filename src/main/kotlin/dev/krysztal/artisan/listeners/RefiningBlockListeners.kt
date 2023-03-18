@@ -18,7 +18,7 @@ import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
 import kotlin.random.Random
 
-class RefineListeners : Listener {
+class RefiningBlockListeners : Listener {
 
     @EventHandler
     fun pickaxeRefineOres(event: PlayerInteractEvent) {
@@ -38,6 +38,8 @@ class RefineListeners : Listener {
 
     @EventHandler
     fun axeRefine(event: PlayerInteractEvent) {
+        if (!event.player.isSneaking) return
+
         val checkResult = check(event, AVAILABLE_AXES_MATERIALS)
         val fortune = checkResult.second
 
@@ -75,7 +77,7 @@ class RefineListeners : Listener {
 
         event.player.world.setType(event.clickedBlock!!.location, Material.AIR)
         event.player.world.spawnParticle(
-            Particle.ASH, event.clickedBlock!!.location.toCenterLocation(), 64, 0.3, 0.3, 0.3
+            Particle.FLAME, event.clickedBlock!!.location.toCenterLocation(), 64, 0.3, 0.3, 0.3
         )
         event.player.giveExp(-ArtisanConfig.REFINE_EXPERIENCE_COST)
         event.player.playSound(

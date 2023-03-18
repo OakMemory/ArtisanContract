@@ -42,7 +42,7 @@ class ExperienceAbsorptionListeners : Listener {
 
     @EventHandler
     fun useItemOnAbsorbBlock(event: PlayerInteractEvent) {
-
+        if (event.player.isSneaking) return
         if (event.clickedBlock?.type != ArtisanConfig.ABSORB_BLOCK) return
         if (!event.isRightHand()) return
 
