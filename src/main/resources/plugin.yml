@@ -4,3 +4,5 @@ main: dev.krysztal.artisan.Artisan
 api-version: 1.19
 prefix: ArtisanContact
 description: A plugin that lets you make a contract with the Artisan
+authors: [ Krysztal Huang <suibing112233@outlook.com> ]
+website: https://github.com/OakMemory/ArtisanContract

@@ -56,6 +56,10 @@ tasks.processResources {
     filesMatching("plugin.yml") { expand(mutableMapOf("version" to version)) }
 }
 
+tasks.shadowJar {
+    from("LICENSE")
+}
+
 compileKotlin.kotlinOptions {
     jvmTarget = "1.8"
 }

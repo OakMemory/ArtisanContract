@@ -67,3 +67,9 @@ Just run this command.
 ```shell
 gradlew reobfJar
 ```
+
+NOTICE: All the code in this project is written in Kotlin, and there is a built-in Kotlin runtime library, so the
+compilation result is large, which is normal.
+
+NOTICE: This project is licensed under the MIT open source license agreement, which is extremely lenient. But I hope
+you will still be able to carry a copy of the license agreement in projects that use it, and don't delete my name.
