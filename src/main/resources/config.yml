@@ -31,4 +31,4 @@ refine:
     - "netherite_axe"
 
 repair:
-  cost_level: 100
+  cost_level: 2

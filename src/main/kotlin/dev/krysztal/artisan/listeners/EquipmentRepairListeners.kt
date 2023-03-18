@@ -30,7 +30,10 @@ class EquipmentRepairListeners : Listener {
             .filterNotNull()
             .filter { it.durability != 0.toShort() }
             .forEach {
-                if (event.player.level < ArtisanConfig.REPAIR_COST) return@forEach
+                if (event.player.level < ArtisanConfig.REPAIR_COST) {
+                    event.player.sendActionBar(Component.text("You don't have enough level to fix your armors."))
+                    return@forEach
+                }
                 if (it.isRepairableBy(event.player.inventory.itemInMainHand)) {
                     val repairPoint = (it.type.maxDurability * coefficient)
 
