@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "dev.krysztal"
-version = "1.1-SNAPSHOT"
+version = "1.1.9-SNAPSHOT"
 
 val targetJavaVersion = 17
 val compileKotlin: KotlinCompile by tasks

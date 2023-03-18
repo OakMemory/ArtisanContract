@@ -12,14 +12,14 @@ class Artisan() : JavaPlugin() {
         pluginInstance = this
 
         this.logger.info("Initializing the configuration file...")
-        this.logger.info("Total number of registered conversion tables:\t\t${ArtisanConfig.EXPERIENCE_CONVERSIONS.count()}")
-        this.logger.info("Total registered axes available for refining:\t\t${ArtisanConfig.REFINE_AVAILABLE_AXES.count()}")
-        this.logger.info("Total registered pickaxes available for refining:\t${ArtisanConfig.REFINE_AVAILABLE_PICKAXES.count()}")
-        this.logger.info("Total registered pickaxes' mapping:\t\t\t${ArtisanConfig.REFINE_AVAILABLE_PICKAXES.count()}")
+        this.logger.info("Total number of registered conversion tables:     ${ArtisanConfig.EXPERIENCE_CONVERSIONS.count()}")
+        this.logger.info("Total registered axes available for refining:     ${ArtisanConfig.AVAILABLE_AXES.count()}")
+        this.logger.info("Total registered pickaxes available for refining: ${ArtisanConfig.AVAILABLE_PICKAXES.count()}")
+        this.logger.info("Total registered pickaxes' mapping:               ${ArtisanConfig.PICKAXE_MATERIAL_REFINE_MAPPING.count()}")
         this.logger.info("Configuration file initialized successfully!")
 
         this.logger.info("Initializing the material list...")
-        ArtisanConfig.REFINE_AVAILABLE_AXES
+        ArtisanConfig.AVAILABLE_AXES
         this.logger.info("Material list initialization is complete!")
 
         this.logger.info("Listener registration in progress...")

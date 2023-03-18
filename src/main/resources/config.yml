@@ -1,9 +1,12 @@
 experience_conversion:
-  - { name: "amethyst_shard", exp: 5, max: 5, min: 0 }
-  - { name: "amethyst_block", exp: 20, max: 20, min: 0 }
-  - { name: "echo_shard", exp: 200, max: 100, min: 0 }
+  - { material: "amethyst_shard", exp: 5, random: 5, mending: true }
+  - { material: "amethyst_block", exp: 20, random: 20, mending: true }
+  - { material: "echo_shard", exp: 200, random: 100, mending: true }
+  - { material: "amethyst_cluster", exp: 15, random: 30, mending: true }
 
-absorption_apply_mending: true
+absorb:
+  block: "bookshelf"
+  item: "book"
 
 refine:
   cost_experience: 100
@@ -15,11 +18,11 @@ refine:
 
   pickaxe_mapping:
     - { from: "iron_ore", to: "iron_ingot" }
-    - { from: "deepslate_iron_ore",to: "iron_ingot" }
+    - { from: "deepslate_iron_ore", to: "iron_ingot" }
     - { from: "gold_ore", to: "gold_ingot" }
-    - { from: "deepslate_gold_ore",to: "gold_ingot" }
+    - { from: "deepslate_gold_ore", to: "gold_ingot" }
     - { from: "diamond_ore", to: "diamond" }
-    - { from: "deepslate_diamond_ore",to: "diamond" }
+    - { from: "deepslate_diamond_ore", to: "diamond" }
 
   axes:
     - "stone_axe"

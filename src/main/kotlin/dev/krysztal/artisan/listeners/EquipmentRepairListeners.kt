@@ -46,8 +46,7 @@ class EquipmentRepairListeners : Listener {
                     repairedDurability += repairPoint.toInt()
                 }
             }
-
-        event.player.sendActionBar(Component.text("Repaired $repairedDurability durability totally."))
-
+        if (repairCount != 0)
+            event.player.sendActionBar(Component.text("Repaired $repairedDurability durability totally."))
     }
 }

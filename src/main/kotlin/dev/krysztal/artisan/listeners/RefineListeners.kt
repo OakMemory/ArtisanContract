@@ -1,9 +1,11 @@
 package dev.krysztal.artisan.listeners
 
-import dev.krysztal.artisan.ArtisanConfig.AVAILABLE_AXES
-import dev.krysztal.artisan.ArtisanConfig.AVAILABLE_PICKAXES
-import dev.krysztal.artisan.ArtisanConfig.PICKAXE_ITEM_REFINE
+import dev.krysztal.artisan.ArtisanConfig
+import dev.krysztal.artisan.ArtisanConfig.AVAILABLE_AXES_MATERIALS
+import dev.krysztal.artisan.ArtisanConfig.AVAILABLE_PICKAXES_MATERIALS
+import dev.krysztal.artisan.ArtisanConfig.PICKAXE_MATERIAL_REFINE_MAPPING
 import dev.krysztal.artisan.foundation.extension.isRightHand
+import dev.krysztal.artisan.foundation.extension.itemInMainHand
 import net.kyori.adventure.text.Component
 import org.bukkit.Material
 import org.bukkit.Particle
@@ -18,18 +20,17 @@ import kotlin.random.Random
 
 class RefineListeners : Listener {
 
-
     @EventHandler
     fun pickaxeRefineOres(event: PlayerInteractEvent) {
-        val checkResult = check(event, AVAILABLE_PICKAXES)
+        val checkResult = check(event, AVAILABLE_PICKAXES_MATERIALS)
         val fortune = checkResult.second
 
         if (!checkResult.first) return
-
-        if (!PICKAXE_ITEM_REFINE.contains(event.clickedBlock?.type)) return
+        val material = PICKAXE_MATERIAL_REFINE_MAPPING[event.clickedBlock!!.type] ?: return
 
         val dropStack = ItemStack(
-            PICKAXE_ITEM_REFINE[event.clickedBlock!!.type]!!, 1 + Random.nextInt(0, fortune)
+            material,
+            1 + Random.nextInt(0, fortune),
         )
 
         breakAndDrop(event, dropStack)
@@ -37,13 +38,14 @@ class RefineListeners : Listener {
 
     @EventHandler
     fun axeRefine(event: PlayerInteractEvent) {
-
-        val checkResult = check(event, AVAILABLE_AXES)
+        val checkResult = check(event, AVAILABLE_AXES_MATERIALS)
         val fortune = checkResult.second
 
         if (!checkResult.first) return
 
-        if (!Tag.LOGS.isTagged(event.clickedBlock?.type!!)) return
+        val material = event.clickedBlock?.type ?: return
+
+        if (!Tag.LOGS.isTagged(material)) return
 
         val dropStack = ItemStack(
             Material.CHARCOAL, 1 + Random.nextInt(0, fortune)
@@ -67,14 +69,18 @@ class RefineListeners : Listener {
     }
 
     private fun breakAndDrop(event: PlayerInteractEvent, dropStack: ItemStack) {
+        if (event.player.hasCooldown(event.player.itemInMainHand().type)) return
+
         event.player.world.dropItemNaturally(event.clickedBlock!!.location, dropStack)
 
         event.player.world.setType(event.clickedBlock!!.location, Material.AIR)
-        event.player.world.spawnParticle(Particle.ASH, event.clickedBlock!!.location.toCenterLocation(), 8)
-        event.player.giveExp(-20)
-
+        event.player.world.spawnParticle(
+            Particle.ASH, event.clickedBlock!!.location.toCenterLocation(), 64, 0.3, 0.3, 0.3
+        )
+        event.player.giveExp(-ArtisanConfig.REFINE_EXPERIENCE_COST)
         event.player.playSound(
             event.clickedBlock!!.location.toCenterLocation(), Sound.BLOCK_FIRE_EXTINGUISH, 1f, 1f
         )
+        event.player.setCooldown(event.player.itemInMainHand().type, 5)
     }
 }
