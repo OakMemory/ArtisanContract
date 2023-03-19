@@ -43,7 +43,7 @@ class EquipmentRepairListeners : Listener {
                             .toShort()
                     event.player.level -= ArtisanConfig.REPAIR_COST
                     event.player.inventory.itemInMainHand.amount -= 1
-                    event.player.world.playSound(event.player, Sound.BLOCK_ANVIL_USE, 0.25f, 0.25f)
+                    event.player.world.playSound(event.player.location, Sound.BLOCK_ANVIL_USE, 0.25f, 0.25f)
                     event.player.world.spawnParticle(Particle.LAVA, event.player.location.toCenterLocation(), 8)
 
                     repairedDurability += repairPoint.toInt()

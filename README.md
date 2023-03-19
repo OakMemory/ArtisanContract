@@ -1,6 +1,11 @@
-# ArtisanContract
+<div align="center">
+<img src="assets/logo.png">
+</div>
 
-A plugin that lets you make a contract with the Artisan.
+<h1 align="center">ArtisanContract</h1> 
+<h2 align="center"> A plugin that lets you make a contract with the Artisan. </h2>
+
+
 
 ## 🤔What's this?
 

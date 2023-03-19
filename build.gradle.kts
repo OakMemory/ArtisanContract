@@ -8,13 +8,13 @@ plugins {
 }
 
 group = "dev.krysztal"
-version = "1.1.9-SNAPSHOT"
+version = "1.2.0-SNAPSHOT"
 
 val targetJavaVersion = 17
 val compileKotlin: KotlinCompile by tasks
 val compileTestKotlin: KotlinCompile by tasks
 
-val paperVersion = "1.19.2-R0.1-SNAPSHOT"
+val paperVersion = "1.18-R0.1-SNAPSHOT"
 
 repositories {
     mavenCentral()
