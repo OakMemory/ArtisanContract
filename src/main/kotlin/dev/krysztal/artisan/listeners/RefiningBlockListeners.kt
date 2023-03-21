@@ -26,7 +26,7 @@ class RefiningBlockListeners : Listener {
         val fortune = checkResult.second
 
         if (!checkResult.first) return
-        val material = PICKAXE_MATERIAL_REFINE_MAPPING[event.clickedBlock!!.type] ?: return
+        val material = PICKAXE_MATERIAL_REFINE_MAPPING[event.clickedBlock?.type] ?: return
 
         val dropStack = ItemStack(
             material,

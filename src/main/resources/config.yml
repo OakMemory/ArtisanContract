@@ -1,15 +1,21 @@
 experience_conversion:
   - { material: "amethyst_shard", exp: 5, random: 5, mending: true }
   - { material: "amethyst_block", exp: 20, random: 20, mending: true }
-  - { material: "echo_shard", exp: 200, random: 100, mending: true }
   - { material: "amethyst_cluster", exp: 15, random: 30, mending: true }
+  - { material: "echo_shard", exp: 200, random: 100, mending: true }
+  - { material: "quartz", exp: 10, random: 30, mending: true }
+  - { material: "raw_copper", exp: 20, random: 30, mending: true }
+  - { material: "copper_ore", exp: 10, random: 40, mending: true }
+  - { material: "deepstale_copper_ore", exp: 10, random: 60, mending: true }
+  - { material: "copper_ingot", exp: 40, random: 30, mending: false }
+
 
 absorb:
   block: "bookshelf"
   item: "book"
 
 refine:
-  cost_experience: 100
+  cost_experience: 20
   pickaxes:
     - "stone_pickaxe"
     - "iron_pickaxe"

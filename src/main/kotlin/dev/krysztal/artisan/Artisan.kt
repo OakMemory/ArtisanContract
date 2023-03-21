@@ -11,6 +11,8 @@ class Artisan() : JavaPlugin() {
     override fun onEnable() {
         pluginInstance = this
 
+        this.logger.info("======================================================")
+
         this.logger.info("Initializing the configuration file...")
         this.logger.info("Total number of registered conversion tables:     ${ArtisanConfig.EXPERIENCE_CONVERSIONS.count()}")
         this.logger.info("Total registered axes available for refining:     ${ArtisanConfig.AVAILABLE_AXES.count()}")
@@ -27,6 +29,8 @@ class Artisan() : JavaPlugin() {
         Bukkit.getPluginManager().registerEvents(RefiningBlockListeners(), this)
         Bukkit.getPluginManager().registerEvents(EquipmentRepairListeners(), this)
         this.logger.info("Successfully registered listener!")
+
+        this.logger.info("======================================================")
     }
 
     override fun onDisable() {
