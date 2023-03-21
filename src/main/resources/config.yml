@@ -9,7 +9,6 @@ experience_conversion:
   - { material: "deepstale_copper_ore", exp: 10, random: 60, mending: true }
   - { material: "copper_ingot", exp: 40, random: 30, mending: false }
 
-
 absorb:
   block: "bookshelf"
   item: "book"
@@ -31,10 +30,8 @@ refine:
     - { from: "deepslate_diamond_ore", to: "diamond" }
 
   axes:
+    - "wooden_axe"
     - "stone_axe"
-    - "iron_axe"
-    - "diamond_axe"
-    - "netherite_axe"
 
 repair:
   cost_level: 2
