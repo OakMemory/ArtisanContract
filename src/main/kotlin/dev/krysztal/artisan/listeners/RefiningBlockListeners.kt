@@ -6,7 +6,6 @@ import dev.krysztal.artisan.ArtisanConfig.AVAILABLE_PICKAXES_MATERIALS
 import dev.krysztal.artisan.ArtisanConfig.PICKAXE_MATERIAL_REFINE_MAPPING
 import dev.krysztal.artisan.foundation.extension.isRightHand
 import dev.krysztal.artisan.foundation.extension.itemInMainHand
-import net.kyori.adventure.text.Component
 import org.bukkit.Material
 import org.bukkit.Particle
 import org.bukkit.Sound
@@ -59,12 +58,9 @@ class RefiningBlockListeners : Listener {
 
     private fun check(event: PlayerInteractEvent, itemList: List<Material>): Pair<Boolean, Int> {
         if (!event.action.isRightClick) return Pair(false, 0)
-        if (!event.isRightHand()) return Pair(false, 0)
-        if (!itemList.contains(event.player.inventory.itemInMainHand.type)) return Pair(false, 0)
-        if (event.player.exp < 20 && event.player.level < 1) {
-            event.player.sendActionBar(Component.text("You don't have enough experience to refining block."))
-            return Pair(false, 0)
-        }
+        else if (!event.isRightHand()) return Pair(false, 0)
+        else if (!itemList.contains(event.player.inventory.itemInMainHand.type)) return Pair(false, 0)
+        else if (event.player.exp < 20 && event.player.level < 1) return Pair(false, 0)
 
         val fortune = event.player.inventory.itemInMainHand.enchantments[Enchantment.LOOT_BONUS_BLOCKS] ?: 1
         return Pair(true, fortune)
@@ -72,16 +68,17 @@ class RefiningBlockListeners : Listener {
 
     private fun breakAndDrop(event: PlayerInteractEvent, dropStack: ItemStack) {
         if (event.player.hasCooldown(event.player.itemInMainHand().type)) return
+        val clickedBlock = event.clickedBlock ?: return
+        
+        event.player.world.dropItemNaturally(clickedBlock.location, dropStack)
 
-        event.player.world.dropItemNaturally(event.clickedBlock!!.location, dropStack)
-
-        event.player.world.setType(event.clickedBlock!!.location, Material.AIR)
+        event.player.world.setType(clickedBlock.location, Material.AIR)
         event.player.world.spawnParticle(
-            Particle.FLAME, event.clickedBlock!!.location.toCenterLocation(), 64, 0.3, 0.3, 0.3
+            Particle.FLAME, clickedBlock.location.toCenterLocation(), 64, 0.3, 0.3, 0.3
         )
         event.player.giveExp(-ArtisanConfig.REFINE_EXPERIENCE_COST)
         event.player.playSound(
-            event.clickedBlock!!.location.toCenterLocation(), Sound.BLOCK_FIRE_EXTINGUISH, 1f, 1f
+            clickedBlock.location.toCenterLocation(), Sound.BLOCK_FIRE_EXTINGUISH, 1f, 1f
         )
         event.player.setCooldown(event.player.itemInMainHand().type, 5)
     }
